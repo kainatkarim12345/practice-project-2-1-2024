@@ -17,8 +17,7 @@ input[type=text]:focus {
 </style>
 
 <script>
- 
-            @if(session('status'))
+    @if(session('status'))
                 const Toast = Swal.mixin({
                 toast: true,
                 position: "top-end",
@@ -35,8 +34,8 @@ input[type=text]:focus {
                 title: "{{ session('status') }}"
                 });
             
-            @endif
-        </script>
+    @endif
+</script>
 
         <!-- Single Page Header start -->
         <div class="container-fluid page-header py-5">
@@ -169,16 +168,12 @@ input[type=text]:focus {
                 </div>
             </div>
         @else
-                    <div class="row g-4 justify-content-center">
-                        <div class="col-8"></div>
-                        <div class="col-sm-8 col-md-7 col-lg-6 col-xl-4">
-                            <div class="bg-light rounded">
-                                <div class="p-4">
-                                    <h1 class="display-6 mb-4 text-center">Empty Cart</h1>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div class="container-fluid py-5">
+                <div class="container py-5">
+                    <h1 class="display-6 mb-4 text-center">Empty Cart</h1>
+                </div>
+            </div>
+                 
         @endif
         <!-- Cart Page End -->
 

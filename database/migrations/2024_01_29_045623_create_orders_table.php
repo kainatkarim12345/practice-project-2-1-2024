@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->string('order_number')->unique();
             $table->string('billing_address');
             $table->string('shipping_address');
             $table->unsignedBigInteger('cart_product_id');

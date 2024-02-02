@@ -42,13 +42,8 @@ Route::post('/add_order_process', [ShopController::class, 'add_order_process'])-
 Route::get('/success', [ShopController::class, 'success'])->name('success');
 Route::get('/cart_item_remove', [ShopController::class, 'cart_item_remove'])->name('cart_item_remove');
 Route::get('productDetail/{id}', [ShopController::class, 'productDetail'])->name('productDetail');
+Route::get('productCategory/{id}', [ShopController::class, 'productCategory'])->name('productCategory');
 Route::get('/shop', [ShopController::class, 'shop'])->name('shop');
 Route::get('/testinomial', [ShopController::class, 'testinomial'])->name('testinomial');
 Route::get('/checkout', [ShopController::class, 'checkout'])->name('checkout');
 Route::get('category_product/{id}', [ShopController::class, 'category_product'])->name('category_product');
-
-
-
-
-
-

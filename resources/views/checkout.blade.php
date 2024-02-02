@@ -211,12 +211,19 @@
                                         @foreach($methods as $key)
                                             <div class="col-12">
                                                 <div class="form-check text-start my-3">
-                                                    <input type="radio" class="form-check-input bg-primary border-0" id="Delivery-1" name="method" value="{{$key->id}}">
-                                                    <label class="form-check-label" for="Delivery-1">{{$key->method}}</label>
+                                                    @if($key->id == 1)
+                                                        <input type="checkbox" checked class="form-check-input bg-primary border-0" id="Delivery-1" name="method" value="{{$key->id}}">
+                                                        <label class="form-check-label" for="Delivery-1">{{$key->method}}</label>
+                                                    @elseif($key->id == 2)
+                                                        <input type="hidden" value="{{ number_format($subtotal, 2) }}" name="total">
+                                                        <div class="btn border-secondary py-3 px-4 text-uppercase w-100 text-danger">Stripe Payment</div>
+                                                        
+                                                    @endif
                                                 </div>
                                             </div>
                                         @endforeach
                                     @endif
+
                                 </div>
                                 <div class="row g-4 text-center align-items-center justify-content-center pt-4">
                                     <input type="hidden" value="{{ number_format($subtotal, 2) }}" name="total">

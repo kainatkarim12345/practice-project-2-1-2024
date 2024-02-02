@@ -21,6 +21,32 @@
             @endif
         </script>
         <!-- Hero Start -->
+        @if(session('orderstatus'))
+                <!-- Banner Section Start-->
+            <div class="container-fluid banner bg-secondary" style="margin-top:10%">
+                <div class="container py-5">
+                    <div class="row g-4 align-items-center">
+                        <div class="col-lg-6">
+                            <div class="py-4">
+                                <h1 class="display-3 text-white">
+                                        {{ session('orderstatus') }}
+                                </h1>
+                                <p class="fw-normal display-3 text-dark mb-4">Your Order Number# {{session('orderId')}}</p>
+                                <p class="mb-4 text-dark">The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic words etc.</p>
+                                <a href="/" class="banner-btn btn border-2 border-white rounded-pill text-dark py-3 px-5">BUY</a>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="position-relative">
+                                <img src="img/baner-2.png" class="img-fluid w-100 rounded" alt="">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Banner Section End -->
+        @else
         <div class="container-fluid py-5 mb-5 hero-header">
             <div class="container py-5">
                 <div class="row g-5 align-items-center">
@@ -132,7 +158,7 @@
                                 @if(sizeOf($categories)>0)
                                     @foreach ($categories as $category)
                                         <li class="nav-item">
-                                            <a class="d-flex py-2 m-2 bg-light rounded-pill" href="#">
+                                            <a class="d-flex py-2 m-2 bg-light rounded-pill" href="{{ route('productCategory', ['id' => $category->id]) }}">
                                                 <span class="text-dark" style="width: 130px;">{{ $category->category }}</span>
                                             </a>
                                         </li>
@@ -732,5 +758,7 @@
             </div>
         </div>
         <!-- Tastimonial End -->
+
+        @endif
 
 @include('layouts/footer')
