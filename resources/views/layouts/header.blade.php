@@ -38,27 +38,11 @@
         <script>
             var url = "{{ route('changeLang') }}";
             $(document).ready(function(){
-                $('.changeLang').change(function(event){
-                    var lang = $(this).val();
-                    $.ajax({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        url: url,
-                        type: 'GET',
-                        data: { lang: lang },
-                        success: function(response) {
-                            // Replace the entire HTML content with the translated content
-                            console.log("successs",response);
-                            $('html').html(response);
-                        },
-                        error: function(jqXHR, textStatus, errorThrown) {
-                            console.error("AJAX Error:", textStatus, errorThrown);
-                            console.log("Status Code:", jqXHR.status);
-                            console.log(jqXHR.responseText);
-                        }
+   
+            $('.changeLang').change(function(event){
+                        console.log(this);
+                        window.location.href = url+"?lang="+$(this).val()
                     });
-                });
             });
         </script>
     </head>
