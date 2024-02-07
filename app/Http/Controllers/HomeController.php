@@ -26,7 +26,7 @@ class HomeController extends Controller
     {
         if(Auth::user()->user_role_id == 1)
         {
-            return view("home");
+            return view("admin.home");
         }
         else if(Auth::user()->user_role_id == 2)
         {

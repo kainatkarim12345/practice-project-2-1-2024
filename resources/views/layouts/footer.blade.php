@@ -106,7 +106,7 @@
     
     <!-- Template Javascript -->
     <script src="{{ url('/assets/js/main.js')}}"></script>
-    <script src="{{ url('/assets/js/jquery.js')}}"></script>
+    <!-- <script src="{{ url('/assets/js/jquery.js')}}"></script> -->
     </body>
 
 </html>

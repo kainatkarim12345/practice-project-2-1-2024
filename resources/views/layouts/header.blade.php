@@ -31,12 +31,40 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" ></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script src="{{ url('/assets/js/jquery.js')}}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+       
         <script src="https://js.stripe.com/v3/"></script>
+        <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script> -->
+        <script>
+            var url = "{{ route('changeLang') }}";
+            $(document).ready(function(){
+                $('.changeLang').change(function(event){
+                    var lang = $(this).val();
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        url: url,
+                        type: 'GET',
+                        data: { lang: lang },
+                        success: function(response) {
+                            // Replace the entire HTML content with the translated content
+                            console.log("successs",response);
+                            $('html').html(response);
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            console.error("AJAX Error:", textStatus, errorThrown);
+                            console.log("Status Code:", jqXHR.status);
+                            console.log(jqXHR.responseText);
+                        }
+                    });
+                });
+            });
+        </script>
     </head>
 
     <body>
-
+    
         <!-- Spinner Start -->
         <div id="spinner" class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
             <div class="spinner-grow text-primary" role="status"></div>
@@ -69,22 +97,28 @@
                         <div class="navbar-nav mx-auto">
                             <a href="/" class="nav-item nav-link active">Home</a>
                             <a href="/shop" class="nav-item nav-link">Shop</a>
-                            <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                                <div class="dropdown-menu m-0 bg-secondary rounded-0">
-                                    <a href="/cart" class="dropdown-item">Cart</a>
-                                    <a href="/checkout" class="dropdown-item">Checkout</a>
-                                    <a href="/testimonial" class="dropdown-item">Testimonial</a>
-                                    <a href="/404" class="dropdown-item">404 Page</a>
-                                </div>
-                            </div>
+                            
+                                <span class="nav-link">Language</span>
+                                <select class="form-select changeLang">
+                                    <option class="" value="en"{{session()->get('locale') == 'en'?'selected':''}}>English</option>
+                                    <option class="" value="es"{{session()->get('locale') == 'es'?'selected':''}}>Spanish</option>
+                                    <option class="" value="fr"{{session()->get('locale') == 'fr'?'selected':''}}>France</option>
+                                </select>
+                               
+                            
                             <a href="/contact" class="nav-item nav-link">Contact</a>
                         </div>
                         <div class="d-flex m-3 me-0">
                             <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
                             <a href="/cart" class="position-relative me-4 my-auto">
                                 <i class="fa fa-shopping-bag fa-2x"></i>
-                                <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">3</span>
+                                <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">
+                                    @if(session('cart') && is_array(session('cart')))
+                                        {{ count(array_unique(array_column(session('cart'), 'product_id'))) }}
+                                    @else
+                                        0
+                                    @endif
+                                </span>
                             </a>
                             @if (Route::has('login'))
                                 <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">

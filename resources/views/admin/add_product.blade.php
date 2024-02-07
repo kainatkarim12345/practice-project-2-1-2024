@@ -1,11 +1,21 @@
-@extends('layouts.app')
+@extends('admin/masterfile')
 
+@section("nav_bar")
+   
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{{ url('/home') }}">Home</a></li>
+          <li class="breadcrumb-item active">Products</li>
+        </ol>
+    
+@endsection
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
+@section("main_content")
+<section class="section dashboard">
+      <div class="row">
+
+        <!-- Left side columns -->
+        <div class="col-lg-12">
+        <div class="card">
                 <div class="card-header">
                     {{ __('ADD PRODUCT FORM') }}
                 </div>
@@ -114,7 +124,6 @@
               </form>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
+      </div>
+    </section>
 @endsection

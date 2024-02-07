@@ -185,6 +185,7 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
         'Stripe' => Cartalyst\Stripe\Laravel\Facades\Stripe::class,
+        'GoogleTranslate' => Stichoza\GoogleTranslate\GoogleTranslate::class,
     ])->toArray(),
 
 ];

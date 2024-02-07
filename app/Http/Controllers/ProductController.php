@@ -9,9 +9,6 @@ use App\Models\CategoryProduct;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
     
@@ -27,13 +24,8 @@ class ProductController extends Controller
             ->orderBy('products.id','desc')
             ->get();
            
-            
-            return view('admin.all_products', $data);
+        return view('admin.all_products', $data);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         //
@@ -49,8 +41,6 @@ class ProductController extends Controller
                 'category' => 'required',
                 'image' => 'required',
             ]);
-
-
     
             $product = new Product();
             $product->product = $request->input('name');

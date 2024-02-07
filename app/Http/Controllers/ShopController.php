@@ -17,28 +17,13 @@ use Stripe\Checkout\Session;
 use App\Mail\SendMail;
 use App\Mail\SendMessageToEndUser;
 use Mail;
+use App\Mail\DemoMail;
 use Stripe\Exception\ApiErrorException;
 
 class ShopController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-
-            // $name = 'kainatkarimname';
-            // $email = 'kainat1458@gmail.com';
-            // $sub = 'test';
-            // $mess = 'testing';
-            // $mailData = [
-            // 'url' => 'https://sandroft.com/',
-            // ];
-            // $send_mail = "mairajahangir1458@gmail.com";
-            // Mail::to($send_mail)->send(new SendMail($name, $email, $sub, $mess));
-            // $senderMessage = "thanks for your message , we will reply you in later";
-            // $response = Mail::to( $email)->send(new SendMessageToEndUser($name,$senderMessage,$mailData));
-            // dd($response);
         try {
             $data['categories'] = Category::all();
             
@@ -48,7 +33,7 @@ class ShopController extends Controller
                                     ->where('products.status' ,'=', 'active')
                                     ->get();
                                     
-        
+
             return view('index', $data);
         } catch (\Exception $e) {
             \Log::error("Exception in addcategory: " . $e->getMessage());
@@ -357,8 +342,13 @@ class ShopController extends Controller
 
                         session()->forget('cart');
 
-
-
+                        $mailData = [
+                            'title' => 'Your Order Number#'.' '.$orderId,
+                            'body' => 'Thank you for your recent purchase. We are honored to gain you as a customer and hope to serve you for a long time.'
+                        ];
+                         
+                        Mail::to($request->input('email'))->send(new DemoMail($mailData));
+                           
                         return redirect()->to("/")->with(['orderstatus' => 'Order Confirmed Successfully', 'orderId' => $orderId]);
                      
                 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\NotificationSendController;
+use App\Http\Controllers\LangController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,32 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
+// Route::group(
+//     [
+//         'prefix' => LaravelLocalization::setLocale(),
+//         'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+//     ], function(){ //...
+    
+//     /** Localized Routes here **/
+//     // Route::get('/', function(){
+//     //     return view("welcome");
+//     // });
+//     Route::get('/', [ShopController::class, 'index']);
+
+//     Route::get('/test', function(){
+//         return view("test");
+//     });
+
+//     Route::get('/es', function(){
+//         return view("welcome");
+//     });
+    
+//     });
+    
+
+Route::get('lang/home',[LangController::class,'index']);
+Route::get('lang/change',[LangController::class,'change'])->name('changeLang');
+
 
 Route::group(['middleware' => 'isAdmin'],function(){
     Route::get('add_product', [ProductController::class, 'index'])->name('home');
@@ -34,6 +61,7 @@ Route::group(['middleware' => 'isAdmin'],function(){
     Route::post('/store-token', [NotificationSendController::class, 'updateDeviceToken'])->name('store.token');
     Route::post('/send-web-notification', [NotificationSendController::class, 'sendNotification'])->name('send.web-notification');
 });
+
 
 Route::get('/', [ShopController::class, 'index']);
 Route::get('/cart', [ShopController::class, 'cart'])->name('cart');
