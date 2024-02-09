@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -26,7 +26,10 @@ class HomeController extends Controller
     {
         if(Auth::user()->user_role_id == 1)
         {
-            return view("admin.home");
+            $data['newOrder'] = DB::table('orders')->where('order_status' , '=' , 'recieved')->get()->count(); 
+            $data['processOrder'] = DB::table('orders')->where('order_status' , '=' , 'process')->get()->count(); 
+            $data['completedOrder'] = DB::table('orders')->where('order_status' , '=' , 'completed')->get()->count(); 
+            return view("admin.home" , $data);
         }
         else if(Auth::user()->user_role_id == 2)
         {

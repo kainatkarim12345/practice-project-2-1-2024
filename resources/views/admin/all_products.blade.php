@@ -20,54 +20,51 @@
               <h5 class="card-title">Products</h5>
               <!-- Table with stripped rows -->
               <table class="table datatable">
+                @if(sizeOf($products))
                 <thead>
                   <tr>
-                    <th>
-                      <b>N</b>ame
-                    </th>
-                    <th>Ext.</th>
-                    <th>City</th>
-                    <th data-type="date" data-format="YYYY/DD/MM">Start Date</th>
-                    <th>Completion</th>
+                    <th>ID</th>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Stock</th>
+                    <th>Discount</th>
+                    <th>Status</th>
+                    <th>Created At</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Unity Pugh</td>
-                    <td>9958</td>
-                    <td>Curicó</td>
-                    <td>2005/02/11</td>
-                    <td>37%</td>
-                  </tr>
-                  <tr>
-                    <td>Theodore Duran</td>
-                    <td>8971</td>
-                    <td>Dhanbad</td>
-                    <td>1999/04/07</td>
-                    <td>97%</td>
-                  </tr>
-                  <tr>
-                    <td>Kylie Bishop</td>
-                    <td>3147</td>
-                    <td>Norman</td>
-                    <td>2005/09/08</td>
-                    <td>63%</td>
-                  </tr>
-                  <tr>
-                    <td>Willow Gilliam</td>
-                    <td>3497</td>
-                    <td>Amqui</td>
-                    <td>2009/29/11</td>
-                    <td>30%</td>
-                  </tr>
-                  <tr>
-                    <td>Blossom Dickerson</td>
-                    <td>5018</td>
-                    <td>Kempten</td>
-                    <td>2006/11/09</td>
-                    <td>17%</td>
-                  </tr>
+                  @foreach($products as $key)
+                    <tr>
+                      <td>{{$key->id}}</td>
+                      <td style="width:15%"><img src="{{ (!empty($key->feature_image)) ? url('storage/images/'.$key->feature_image) : url('storage/images/no-attachment.png') }}" width="35%" alt=""></td>
+                      <td>{{$key->product}}</td>
+                      <td><a href="/">{{$key->category}}</a></td>
+                      <td>{{$key->stock}}</td>
+                        @if($key->discount)
+                          <td class="text-center"><span class="badge bg-danger">- {{$key->discount}} OFF</span></td>
+                        @else
+                          <td class="text-center">--</td>
+                        @endif
+                        
+                        @if($key->status == 'active')
+                            <td class="text-center"><span class="badge bg-primary">{{$key->status}}</span></td>
+                        @else
+                            <td class="text-center"><span class="badge bg-warning">{{$key->status}}</span></td>
+                        @endif
+                      <td>{{ \Carbon\Carbon::parse($key->created_at)->format('Y-m-d') }}</td>
+                      <td>
+                      <select class="form-select bg-success text-light" aria-label="Default select example" onchange="window.location.href=this.value;">
+                          <option value="/home">Click</option>
+                          <option value="/home">View</option>
+                          <option value="/home">Edit</option>
+                      </select>
+                      </td>
+                    </tr>
+                  @endforeach
                 </tbody>
+                @endif
               </table>
               <!-- End Table with stripped rows -->
 

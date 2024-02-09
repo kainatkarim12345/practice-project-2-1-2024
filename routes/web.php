@@ -55,8 +55,12 @@ Route::get('lang/change',[LangController::class,'change'])->name('changeLang');
 
 Route::group(['middleware' => 'isAdmin'],function(){
     Route::get('add_product', [ProductController::class, 'index'])->name('home');
-    Route::get('all_products', [ProductController::class, 'all_products'])->name('home');
+    Route::get('all_products', [ProductController::class, 'all_products'])->name('all_products');
+    Route::get('all_categories', [ProductController::class, 'all_categories'])->name('all_categories');
+    Route::get('all_orders', [ProductController::class, 'all_orders'])->name('all_orders');
+    Route::get('orderDetail/{id}', [ProductController::class, 'orderDetail'])->name('orderDetail');
     Route::post('store', [ProductController::class, 'store'])->name('store');
+    Route::post('orderStatusChange', [ProductController::class, 'orderStatusChange'])->name('orderStatusChange');
     Route::post('addcategory', [AjaxController::class, 'addcategory'])->name('addcategory');
     Route::post('/store-token', [NotificationSendController::class, 'updateDeviceToken'])->name('store.token');
     Route::post('/send-web-notification', [NotificationSendController::class, 'sendNotification'])->name('send.web-notification');

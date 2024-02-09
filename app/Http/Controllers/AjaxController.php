@@ -7,9 +7,10 @@ use Illuminate\Support\Facades\Session;
 
 class AjaxController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function addcategory(Request $request)
     {
         try {

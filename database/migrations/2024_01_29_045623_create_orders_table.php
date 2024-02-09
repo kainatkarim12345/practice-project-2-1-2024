@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->enum('order_status', ['recieved', 'process', 'completed' ,'cancelled'])->default('recieved');
             $table->string('order_number')->unique();
             $table->string('billing_address');
             $table->string('shipping_address');

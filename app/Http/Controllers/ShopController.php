@@ -40,6 +40,24 @@ class ShopController extends Controller
             return response()->json(['error' => 'Internal Server Error', 'details' => $e->getMessage()], 500);
         }
     }
+    public function productCategory($id)
+    {
+        try {
+            $data['categories'] = Category::all();
+            
+            $data['products'] = DB::table('category_products')
+                                    ->join('products', 'products.id', '=' , 'category_products.product_id')
+                                    ->join('categories', 'categories.id', '=' , 'category_products.category_id')
+                                    ->where('products.status' ,'=', 'active')
+                                    ->where('category_products.category_id' ,'=', $id)
+                                    ->get();     
+
+            return view('shop', $data);
+        } catch (\Exception $e) {
+            \Log::error("Exception in addcategory: " . $e->getMessage());
+            return response()->json(['error' => 'Internal Server Error', 'details' => $e->getMessage()], 500);
+        }
+    }
     public function category_product($categoryId)
     {
         try {
@@ -58,6 +76,7 @@ class ShopController extends Controller
     }
     public function addtToCart(Request $request)
     {
+        dd($request);
         try {
             $quantity = $request->input('quantity', 1);
 

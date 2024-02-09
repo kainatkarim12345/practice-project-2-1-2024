@@ -51,13 +51,11 @@
             <div class="container py-5">
                 <div class="row g-5 align-items-center">
                     <div class="col-md-12 col-lg-7">
-                        <h4 class="mb-3 text-secondary">100% Organic Foods</h4>
-                        <h1 class="mb-5 display-3 text-primary">Organic Veggies & Fruits Foods</h1>
-                        <h3>{{ GoogleTranslate::trans('welcome to webapp',app()->getLocale()) }}</h3>
-                        <h3>{{ GoogleTranslate::trans('heloow world',app()->getLocale()) }}</h3>
+                        <h4 class="mb-3 text-secondary">{{ GoogleTranslate::trans('100% Organic Foods',app()->getLocale()) }}</h4>
+                        <h1 class="mb-5 display-3 text-primary">{{ GoogleTranslate::trans('Organic Veggies & Fruits Foods',app()->getLocale()) }}</h1>
                         <div class="position-relative mx-auto">
                             <input class="form-control border-2 border-secondary w-75 py-3 px-4 rounded-pill" type="number" placeholder="Search">
-                            <button type="submit" class="btn btn-primary border-2 border-secondary py-3 px-4 position-absolute rounded-pill text-white h-100" style="top: 0; right: 25%;">Submit Now</button>
+                            <button type="submit" class="btn btn-primary border-2 border-secondary py-3 px-4 position-absolute rounded-pill text-white h-100" style="top: 0; right: 25%;">{{ GoogleTranslate::trans('Submit Now',app()->getLocale()) }}</button>
                         </div>
                     </div>
                     <div class="col-md-12 col-lg-5">
@@ -98,8 +96,8 @@
                                 <i class="fas fa-car-side fa-3x text-white"></i>
                             </div>
                             <div class="featurs-content text-center">
-                                <h5>Free Shipping</h5>
-                                <p class="mb-0">Free on order over $300</p>
+                                <h5>{{ GoogleTranslate::trans('Free Shipping',app()->getLocale()) }}</h5>
+                                <p class="mb-0">{{ GoogleTranslate::trans('Free on order over $300',app()->getLocale()) }}</p>
                             </div>
                         </div>
                     </div>
@@ -109,8 +107,8 @@
                                 <i class="fas fa-user-shield fa-3x text-white"></i>
                             </div>
                             <div class="featurs-content text-center">
-                                <h5>Security Payment</h5>
-                                <p class="mb-0">100% security payment</p>
+                                <h5>{{ GoogleTranslate::trans('Security Payment',app()->getLocale()) }}</h5>
+                                <p class="mb-0">{{ GoogleTranslate::trans('100% security payment',app()->getLocale()) }}</p>
                             </div>
                         </div>
                     </div>
@@ -120,8 +118,8 @@
                                 <i class="fas fa-exchange-alt fa-3x text-white"></i>
                             </div>
                             <div class="featurs-content text-center">
-                                <h5>30 Day Return</h5>
-                                <p class="mb-0">30 day money guarantee</p>
+                                <h5>{{ GoogleTranslate::trans('30 Day Return',app()->getLocale()) }}</h5>
+                                <p class="mb-0">{{ GoogleTranslate::trans('30 day money guarantee',app()->getLocale()) }}</p>
                             </div>
                         </div>
                     </div>
@@ -131,8 +129,8 @@
                                 <i class="fa fa-phone-alt fa-3x text-white"></i>
                             </div>
                             <div class="featurs-content text-center">
-                                <h5>24/7 Support</h5>
-                                <p class="mb-0">Support every time fast</p>
+                                <h5>{{ GoogleTranslate::trans('24/7 Support',app()->getLocale()) }}</h5>
+                                <p class="mb-0">{{ GoogleTranslate::trans('Support every time fast',app()->getLocale()) }}</p>
                             </div>
                         </div>
                     </div>
@@ -148,20 +146,20 @@
                 <div class="tab-class text-center">
                     <div class="row g-4">
                         <div class="col-lg-4 text-start">
-                            <h1>Our Organic Products</h1>
+                            <h1>{{ GoogleTranslate::trans('Our Organic Products',app()->getLocale()) }}</h1>
                         </div>
                         <div class="col-lg-8 text-end">
                             <ul class="nav nav-pills d-inline-flex text-center mb-5">
                                 <li class="nav-item">
                                     <a class="d-flex m-2 py-2 bg-light rounded-pill active" data-bs-toggle="pill" href="#tab-1">
-                                        <span class="text-dark" style="width: 130px;">All Products</span>
+                                        <span class="text-dark" style="width: 130px;">{{ GoogleTranslate::trans('All Products',app()->getLocale()) }}</span>
                                     </a>
                                 </li>
                                 @if(sizeOf($categories)>0)
                                     @foreach ($categories as $category)
                                         <li class="nav-item">
                                             <a class="d-flex py-2 m-2 bg-light rounded-pill" href="{{ route('productCategory', ['id' => $category->id]) }}">
-                                                <span class="text-dark" style="width: 130px;">{{ $category->category }}</span>
+                                                <span class="text-dark" style="width: 130px;">{{ GoogleTranslate::trans($category->category ,app()->getLocale()) }}</span>
                                             </a>
                                         </li>
                                     @endforeach
@@ -184,11 +182,11 @@
                                                         <img src="{{ (!empty($key->feature_image)) ? url('storage/images/'.$key->feature_image) : url('storage/images/no-attachment.png') }}" class="img-fluid w-100 rounded-top" style=" width: 100%;height: 300px;" alt="">
                                                     </div>
                                                     @if($key->discount)
-                                                        <div class="text-white bg-danger px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">{{$key->discount}}% OFF</div>
+                                                        <div class="text-white bg-danger px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">{{ $key->discount }} {{ GoogleTranslate::trans('% OFF',app()->getLocale()) }}</div>
                                                     @endif
                                                     <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                        <a href="{{ route('productDetail', ['id' => $key->product_id]) }}"><h4>{{ $key->product }}</h4></a>
-                                                        <p>{{$key->description}}</p>
+                                                        <a href="{{ route('productDetail', ['id' => $key->product_id]) }}"><h4>{{ GoogleTranslate::trans($key->product,app()->getLocale()) }}</h4></a>
+                                                        <p>{{ GoogleTranslate::trans($key->description,app()->getLocale()) }}</p>
                                                         <div class="d-flex justify-content-between flex-lg-wrap">
                                                             @if($key->discount)
                                                                 @php
@@ -204,7 +202,7 @@
                                                             <form action="/addtToCart" method="POST">
                                                                 @csrf 
                                                                 <input type="hidden" name="product_id" value="{{$key->product_id}}">
-                                                                <button type="submit" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i>Add to cart</button>
+                                                                <button type="submit" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i>{{ GoogleTranslate::trans('Add to cart',app()->getLocale()) }}</button>
                                                             </form>
                                                         </div>
                                                     </div>

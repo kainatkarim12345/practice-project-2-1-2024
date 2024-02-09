@@ -9,6 +9,10 @@ use App\Models\Notification;
 
 class NotificationSendController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function updateDeviceToken(Request $request)
     {
         // dd($request);
