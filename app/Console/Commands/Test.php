@@ -29,16 +29,14 @@ class Test extends Command
      */
     public function handle()
     {
-        // Discount message
         $discountMsg = [
             'title' => 'MEGA SALE',
         ];
 
-        // Get customers
         $customers = User::where('user_role_id', '=', '2')->get();
 
         foreach ($customers as $customer) {
-            // Send notification
+        
             Notification::send($customer, new DiscountNotification($discountMsg));
         }
 
