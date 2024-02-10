@@ -55,6 +55,8 @@ Route::get('lang/change',[LangController::class,'change'])->name('changeLang');
 
 Route::group(['middleware' => 'isAdmin'],function(){
     Route::get('add_product', [ProductController::class, 'index'])->name('home');
+    Route::get('send_notify', [ProductController::class, 'send_notify'])->name('send_notify');
+    Route::post('send_notify_process', [ProductController::class, 'send_notify_process'])->name('send_notify_process');
     Route::get('all_products', [ProductController::class, 'all_products'])->name('all_products');
     Route::get('all_categories', [ProductController::class, 'all_categories'])->name('all_categories');
     Route::get('all_orders', [ProductController::class, 'all_orders'])->name('all_orders');

@@ -6,7 +6,11 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Order;
+use App\Models\User;
+use Carbon\Carbon;
 use App\Models\CategoryProduct;
+use App\Notifications\DiscountNotification;
+use Illuminate\Support\Facades\Notification;
 
 class ProductController extends Controller
 {
@@ -133,35 +137,32 @@ class ProductController extends Controller
         }
     }
 
-
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function send_notify()
     {
-        //
+        return view('admin.send_notify');
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function send_notify_process(REQUEST $request)
     {
-        //
-    }
+        // $discountMsg = [
+        //     'title' => 'MEGA SALE',
+        // ];
 
-    /**
-     * Update the specified resource in storage.
-     */
+        // // Schedule the notification to be sent 1 day from now
+        // $scheduledTime = Carbon::now()->addDay(); // 1 day from now
+
+        // // Get customers
+        // $customers = User::where('user_role_id', '=', '2')->get();
+
+        // foreach ($customers as $customer) {
+        //     Notification::send($customer, new DiscountNotification($discountMsg))->delay($scheduledTime);
+        // }
+
+        dd('done');
+    }
     public function update(Request $request, string $id)
     {
         //
     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         //
